@@ -10,7 +10,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using QuickBuy.BL.Interfaces;
+using QuickBuy.BL.Services;
+using QuickBuy.DA.Interfaces;
 using QuickBuy.DA.Models;
+using QuickBuy.DA.Repositories;
 
 namespace QuickBuy.Api
 {
@@ -26,6 +30,9 @@ namespace QuickBuy.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ITestService, TestService>();
+            services.AddTransient<ITestRepository, TestRepository>();
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<User, IdentityRole>() //essential, must be over AddAuthentication
