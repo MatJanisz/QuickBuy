@@ -30,5 +30,7 @@ namespace QuickBuy.DA.Models
         public string ImageSource { get; set; }
 
         public Category Category { get; set; }
+
+        public ICollection<UserProduct> UserProducts { get; set; }
     }
 }

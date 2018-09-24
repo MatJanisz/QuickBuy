@@ -9,5 +9,7 @@ namespace QuickBuy.DA.Models
     {
         public float AmountOfMoney { get; set; }
         public bool IsAdmin { get; set; }
+        public ICollection<Product> Products { get; set; }
+        public ICollection<UserProduct> UserProducts { get; set; }
     }
 }

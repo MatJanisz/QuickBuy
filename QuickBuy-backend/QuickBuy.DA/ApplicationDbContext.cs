@@ -23,5 +23,6 @@ namespace QuickBuy.DA.Models
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<UserProduct> UserProducts { get; set; }
     }
 }
