@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -39,6 +40,7 @@ namespace QuickBuy.Api
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc();
+            services.AddAutoMapper(); // in order to use automapper install Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
