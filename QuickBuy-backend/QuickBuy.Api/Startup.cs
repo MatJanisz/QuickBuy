@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +15,9 @@ using QuickBuy.BL.Services;
 using QuickBuy.DA.Interfaces;
 using QuickBuy.DA.Models;
 using QuickBuy.DA.Repositories;
+using AutoMapper;
+using QuickBuy.BL.ViewModel;
+using QuickBuy.DA.Dto;
 
 namespace QuickBuy.Api
 {
@@ -34,13 +36,32 @@ namespace QuickBuy.Api
             services.AddTransient<ITestService, TestService>();
             services.AddTransient<ITestRepository, TestRepository>();
 
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
+
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>() //essential, must be over AddAuthentication
+            services.AddIdentity<User, IdentityRole>(c => {  //essential, must be over AddAuthentication
+                c.Password.RequireDigit = false;
+                c.Password.RequireLowercase = false;
+                c.Password.RequireUppercase = false;
+                c.Password.RequireNonAlphanumeric = false;
+                c.Password.RequiredLength = 6;
+            }) 
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc();
-            services.AddAutoMapper(); // in order to use automapper install Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
+
+
+            var config = new AutoMapper.MapperConfiguration(c =>
+            {
+                c.AddProfile(new MappingProfileViewModel());
+                c.AddProfile(new MappingProfileDto());
+            });
+
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+            //services.AddAutoMapper(); // in order to use automapper install Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
