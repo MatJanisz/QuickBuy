@@ -27,6 +27,11 @@ namespace QuickBuy.BL.Services
             return await _userRepository.CreateAsync(accountDto);
         }
 
+        public void AddMoney(float amount, string email)
+        {
+            _userRepository.AddMoney(amount, email);
+        }
+
         public Task<string> Login(AccountRegisterLoginViewModel model)
         {
             var accountDto = _mapper.Map<AccountRegisterLoginDto>(model);

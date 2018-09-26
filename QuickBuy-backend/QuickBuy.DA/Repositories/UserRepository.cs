@@ -8,6 +8,7 @@ using QuickBuy.DA.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,6 +49,13 @@ namespace QuickBuy.DA.Repositories
             return false;
         }
 
+        public void AddMoney(float amount, string email)
+        {
+            var user = _context.Users.Single(u => u.Email == email);
+            user.AmountOfMoney += amount;
+            _context.SaveChanges();
+        }
+
         public async Task<string> CreateToken(AccountRegisterLoginDto accountRegisterLoginDto)
         {
             var user = await _userManager.FindByEmailAsync(accountRegisterLoginDto.Email);
@@ -68,7 +76,7 @@ namespace QuickBuy.DA.Repositories
 
             var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Typ, user.IsAdmin.ToString()),
+                new Claim(ClaimTypes.Role, user.IsAdmin.ToString()),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));

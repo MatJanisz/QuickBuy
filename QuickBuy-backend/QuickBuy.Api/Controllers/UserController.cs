@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.Configuration;
@@ -34,11 +35,36 @@ namespace QuickBuy.Api.Controllers
             return BadRequest();
         }
 
+        [HttpGet("AddMoney/{amount}")]
+        public IActionResult AddMoney(float amount)
+        {
+            var currentUser = HttpContext.User;
+            var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            _iUserService.AddMoney(amount, email);
+            return Ok();
+        }
+
         [HttpPost("Login")]
         public IActionResult Login([FromBody] AccountRegisterLoginViewModel model)
         {
             var tokenstring = _iUserService.Login(model);
             return Ok(new { token = tokenstring.Result });
+        }
+
+        [HttpGet("GetEmailOfLoggedUser"), Authorize]
+        public IActionResult GetEmailOfLoggedUser()
+        {
+            var currentUser = HttpContext.User;
+            var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            return Ok(email);
+        }
+
+        [HttpGet("IsLoggedUserAdmin"), Authorize]
+        public IActionResult IsLoggedUserAdmin()
+        {
+            var currentUser = HttpContext.User;
+            var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+            return Ok(email);
         }
 
         [Authorize]
