@@ -27,9 +27,11 @@ namespace QuickBuy.BL.Services
             return await _userRepository.CreateAsync(accountDto);
         }
 
-        public Task<string> CreateToken(AccountRegisterLoginViewModel accountRegisterLoginViewModel)
+        public Task<string> Login(AccountRegisterLoginViewModel model)
         {
-            throw new NotImplementedException();
+            var accountDto = _mapper.Map<AccountRegisterLoginDto>(model);
+            var result = _userRepository.CreateToken(accountDto);
+            return result;
         }
     }
 }

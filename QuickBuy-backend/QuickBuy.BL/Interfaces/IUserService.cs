@@ -9,6 +9,6 @@ namespace QuickBuy.BL.Interfaces
     public interface IUserService
     {
         Task<bool> Create(AccountRegisterLoginViewModel model);
-        Task<string> CreateToken(AccountRegisterLoginViewModel accountRegisterLoginViewModel);
+        Task<string> Login(AccountRegisterLoginViewModel accountRegisterLoginViewModel);
     }
 }
