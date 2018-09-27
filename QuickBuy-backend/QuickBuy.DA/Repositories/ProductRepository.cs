@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using QuickBuy.DA.Dto;
 using QuickBuy.DA.Interfaces;
 using QuickBuy.DA.Models;
@@ -22,7 +23,7 @@ namespace QuickBuy.DA.Repositories
 
         public ProductDto GetProduct(Guid id)
         {
-            var product = _context.Products.Single(n => n.Id == id);
+            var product = _context.Products.Include(u => u.User).Single(n => n.Id == id);
             var result = _mapper.Map<ProductDto>(product);
             return result;
         }
@@ -53,10 +54,6 @@ namespace QuickBuy.DA.Repositories
             var productInDb = _context.Products.Single(n => n.Id == id);
             _context.Products.Remove(productInDb);
             _context.SaveChanges();
-        }
-
-        public void ahd()
-        {
         }
     }
 }
