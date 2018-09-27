@@ -20,6 +20,30 @@ namespace QuickBuy.BL.Services
             _mapper = mapper;
         }
 
+        public IEnumerable<ProductViewModel> GetAll()
+        {
+            var result = _productRepository.GetAll();
+            return _mapper.Map<List<ProductViewModel>>(result);
+        }
+
+        public IEnumerable<ProductViewModel> GetProductsByName(string name)
+        {
+            var result = _productRepository.GetProductsByName(name);
+            return _mapper.Map<List<ProductViewModel>>(result);
+        }
+
+        public IEnumerable<ProductViewModel> GetProductsByCategory(string category)
+        {
+            var result = _productRepository.GetProductsByCategory(category);
+            return _mapper.Map<List<ProductViewModel>>(result);
+        }
+
+        public IEnumerable<ProductViewModel> GetProductsByNameAndCategory(string name, string category)
+        {
+            var result = _productRepository.GetProductsByNameAndCategory(name, category);
+            return _mapper.Map<List<ProductViewModel>>(result);
+        }
+
         public ProductViewModel GetProduct(Guid id)
         {
             var productDto =_productRepository.GetProduct(id);

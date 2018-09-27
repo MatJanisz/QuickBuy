@@ -25,10 +25,38 @@ namespace QuickBuy.Api.Controllers
             //  _config = config;
         }
 
+        [HttpGet()]
+        public IActionResult GetAll()
+        {
+            var result = _iProductService.GetAll();
+            return Ok(result);
+        }
+
         [HttpGet("GetProduct/{id}")]
         public IActionResult GetProduct(Guid id)
         {
             var result = _iProductService.GetProduct(id);
+            return Ok(result);
+        }
+
+        [HttpGet("GetProductsByName/{name}")]
+        public IActionResult GetProductsByName(string name)
+        {
+            var result = _iProductService.GetProductsByName(name);
+            return Ok(result);
+        }
+
+        [HttpGet("GetProductsByCategory/{category}")]
+        public IActionResult GetProductsByCategory(string category)
+        {
+            var result = _iProductService.GetProductsByCategory(category);
+            return Ok(result);
+        }
+
+        [HttpGet("GetProductsByNameAndCategory/{name}/{category}")]
+        public IActionResult GetProductsByCategory(string name, string category)
+        {
+            var result = _iProductService.GetProductsByNameAndCategory(name, category);
             return Ok(result);
         }
 

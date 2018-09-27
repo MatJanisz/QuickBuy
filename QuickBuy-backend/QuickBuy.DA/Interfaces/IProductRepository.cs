@@ -11,5 +11,9 @@ namespace QuickBuy.DA.Interfaces
         void EditProduct(ProductDto editedProduct, string email);
         void DeleteProduct(Guid id);
         ProductDto GetProduct(Guid id);
+        IEnumerable<ProductDto> GetAll();
+        IEnumerable<ProductDto> GetProductsByName(string name);
+        IEnumerable<ProductDto> GetProductsByCategory(string category);
+        IEnumerable<ProductDto> GetProductsByNameAndCategory(string name, string category);
     }
 }

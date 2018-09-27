@@ -21,6 +21,31 @@ namespace QuickBuy.DA.Repositories
             _mapper = mapper;
         }
 
+        public IEnumerable<ProductDto> GetAll()
+        {
+            var result = _context.Products.Include(u => u.User);
+            return _mapper.Map<List<ProductDto>>(result);
+        }
+
+        public IEnumerable<ProductDto> GetProductsByName(string name)
+        {
+            var result = _context.Products.Where(n => n.Name.Contains(name));
+            return _mapper.Map<List<ProductDto>>(result);
+        }
+
+        public IEnumerable<ProductDto> GetProductsByCategory(string category)
+        {
+            var result = _context.Products.Include(u => u.User).Where(n => n.Category.ToString() == category);
+            return _mapper.Map<List<ProductDto>>(result);
+        }
+
+        public IEnumerable<ProductDto> GetProductsByNameAndCategory(string name, string category)
+        {
+            var result = _context.Products.Include(u => u.User).Where((n => n.Name.Contains(name)
+            && n.Category.ToString() == category));
+            return _mapper.Map<List<ProductDto>>(result);
+        }
+
         public ProductDto GetProduct(Guid id)
         {
             var product = _context.Products.Include(u => u.User).Single(n => n.Id == id);

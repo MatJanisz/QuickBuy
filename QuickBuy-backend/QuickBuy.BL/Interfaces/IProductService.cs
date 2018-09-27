@@ -11,5 +11,9 @@ namespace QuickBuy.BL.Interfaces
         void EditProduct(ProductViewModel editedProduct, string email);
         void DeleteProduct(Guid id);
         ProductViewModel GetProduct(Guid id);
+        IEnumerable<ProductViewModel> GetAll();
+        IEnumerable<ProductViewModel> GetProductsByName(string name);
+        IEnumerable<ProductViewModel> GetProductsByCategory(string category);
+        IEnumerable<ProductViewModel> GetProductsByNameAndCategory(string name, string category);
     }
 }
