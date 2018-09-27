@@ -87,5 +87,13 @@ namespace QuickBuy.Api.Controllers
             }
             return Unauthorized();
         }
+
+        [HttpPost("BuyProduct/{id}"), Authorize]
+        public IActionResult BuyProduct(Guid id)
+        {
+            var email = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            var result = _iProductService.BuyProduct(id, email);
+            return Ok(result);
+        }
     }
 }

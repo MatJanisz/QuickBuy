@@ -15,5 +15,6 @@ namespace QuickBuy.BL.Interfaces
         IEnumerable<ProductViewModel> GetProductsByName(string name);
         IEnumerable<ProductViewModel> GetProductsByCategory(string category);
         IEnumerable<ProductViewModel> GetProductsByNameAndCategory(string name, string category);
+        string BuyProduct(Guid id, string email);
     }
 }

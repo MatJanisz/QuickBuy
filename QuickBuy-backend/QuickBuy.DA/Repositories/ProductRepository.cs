@@ -80,5 +80,29 @@ namespace QuickBuy.DA.Repositories
             _context.Products.Remove(productInDb);
             _context.SaveChanges();
         }
+
+        public string BuyProduct(Guid id, int howMany, string email)
+        {
+            var user = _context.Users.Single(u => u.Email == email);
+            var product = _context.Products.Include(u => u.User).Single(n => n.Id == id);
+            if (product.Quantity <= 0)
+                return "Product not available";
+            if (product.Price*howMany > user.AmountOfMoney)
+                return "You do not have enough money";
+            var transaction = new UserProduct
+            {
+                ProductId = product.Id,
+                UserId = user.Id
+            };
+            for(int i=0;i<howMany;i++)
+            {
+                user.AmountOfMoney -= product.Price;
+                product.User.AmountOfMoney += product.Price;
+
+                _context.UserProducts.Add(transaction);
+                _context.SaveChanges();
+            }
+            return "You bought " + product.Name;
+        }
     }
 }

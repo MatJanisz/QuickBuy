@@ -67,5 +67,11 @@ namespace QuickBuy.BL.Services
         {
             _productRepository.DeleteProduct(id);
         }
+
+        public string BuyProduct(Guid id, string email)
+        {
+            var result = _productRepository.BuyProduct(id, email);
+            return result;
+        }
     }
 }
