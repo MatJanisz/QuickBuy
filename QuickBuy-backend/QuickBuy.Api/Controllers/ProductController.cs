@@ -54,9 +54,25 @@ namespace QuickBuy.Api.Controllers
         }
 
         [HttpGet("GetProductsByNameAndCategory/{name}/{category}")]
-        public IActionResult GetProductsByCategory(string name, string category)
+        public IActionResult GetProductsByNameAndCategory(string name, string category)
         {
             var result = _iProductService.GetProductsByNameAndCategory(name, category);
+            return Ok(result);
+        }
+
+        [HttpGet("GetAllMyProducts")]
+        public IActionResult GetAllMyProducts()
+        {
+            var email = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            var result = _iProductService.GetAllMyProducts(email);
+            return Ok(result);
+        }
+
+        [HttpGet("GetAllMyBoughtProducts")]
+        public IActionResult GetAllMyBoughtProducts()
+        {
+            var email = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            var result = _iProductService.GetAllMyBoughtProducts(email);
             return Ok(result);
         }
 
@@ -88,11 +104,11 @@ namespace QuickBuy.Api.Controllers
             return Unauthorized();
         }
 
-        [HttpPost("BuyProduct/{id}"), Authorize]
-        public IActionResult BuyProduct(Guid id)
+        [HttpPost("BuyProduct/{id}/{howMany}"), Authorize]
+        public IActionResult BuyProduct(Guid id, int howMany)
         {
             var email = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Email).Value;
-            var result = _iProductService.BuyProduct(id, email);
+            var result = _iProductService.BuyProduct(id, howMany, email);
             return Ok(result);
         }
     }

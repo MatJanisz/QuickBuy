@@ -38,5 +38,10 @@ namespace QuickBuy.BL.Services
             var result = _userRepository.CreateToken(accountDto);
             return result;
         }
+
+        public float GetMoneyOfLoggedUser(string email)
+        {
+            return _userRepository.GetMoneyOfLoggedUser(email);
+        }
     }
 }

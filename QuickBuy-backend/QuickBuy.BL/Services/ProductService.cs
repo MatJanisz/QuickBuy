@@ -51,6 +51,18 @@ namespace QuickBuy.BL.Services
             return result;
         }
 
+        public IEnumerable<ProductViewModel> GetAllMyProducts(string email)
+        {
+            var result = _productRepository.GetAllMyProducts(email);
+            return _mapper.Map<List<ProductViewModel>>(result);
+        }
+
+        public IEnumerable<ProductViewModel> GetAllMyBoughtProducts(string email)
+        {
+            var result = _productRepository.GetAllMyBoughtProducts(email);
+            return _mapper.Map<List<ProductViewModel>>(result);
+        }
+
         public void AddProduct(ProductViewModel newProduct, string email)
         {
             var productDtoObject = _mapper.Map<ProductDto>(newProduct);
@@ -68,9 +80,9 @@ namespace QuickBuy.BL.Services
             _productRepository.DeleteProduct(id);
         }
 
-        public string BuyProduct(Guid id, string email)
+        public string BuyProduct(Guid id, int howMany, string email)
         {
-            var result = _productRepository.BuyProduct(id, email);
+            var result = _productRepository.BuyProduct(id, howMany, email);
             return result;
         }
     }

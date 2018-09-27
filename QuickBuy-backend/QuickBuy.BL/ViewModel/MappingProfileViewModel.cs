@@ -11,7 +11,6 @@ namespace QuickBuy.BL.ViewModel
         public MappingProfileViewModel()
         {
             CreateMap<AccountRegisterLoginViewModel, AccountRegisterLoginDto>().ReverseMap();
-            CreateMap<ProductViewModel, ProductDto>().ReverseMap();
-        }
+            CreateMap<ProductViewModel, ProductDto>().ReverseMap();        }
     }
 }

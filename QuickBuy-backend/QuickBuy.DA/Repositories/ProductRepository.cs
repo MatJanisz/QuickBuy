@@ -53,6 +53,27 @@ namespace QuickBuy.DA.Repositories
             return result;
         }
 
+        public IEnumerable<ProductDto> GetAllMyProducts(string email)
+        {
+            var user = _context.Users.Single(u => u.Email == email);
+            var result = _context.Products.Where(n => n.User.Id == user.Id);
+            return _mapper.Map<List<ProductDto>>(result);
+        }
+
+        public IEnumerable<ProductDto> GetAllMyBoughtProducts(string email)
+        {
+            var user = _context.Users.Single(u => u.Email == email);
+            var userProducts = _context.UserProducts.Where(n => n.UserId == user.Id)
+                .Include(u => u.User).Include(p => p.Product);
+            foreach(var item in userProducts)
+            {
+                item.Product.Quantity = item.HowManyItems;
+            }
+            var products = userProducts.Select(n => n.Product);
+            products = products.Include(u => u.User);
+            return _mapper.Map<List<ProductDto>>(products);
+        }
+
         public void AddProduct(ProductDto newProduct, string email)
         {
             var productObject = _mapper.Map<Product>(newProduct);
@@ -85,24 +106,34 @@ namespace QuickBuy.DA.Repositories
         {
             var user = _context.Users.Single(u => u.Email == email);
             var product = _context.Products.Include(u => u.User).Single(n => n.Id == id);
-            if (product.Quantity <= 0)
+            if (product.Quantity <= 0 || howMany>product.Quantity)
                 return "Product not available";
             if (product.Price*howMany > user.AmountOfMoney)
                 return "You do not have enough money";
             var transaction = new UserProduct
             {
                 ProductId = product.Id,
-                UserId = user.Id
+                UserId = user.Id,
+                HowManyItems = howMany
             };
-            for(int i=0;i<howMany;i++)
-            {
-                user.AmountOfMoney -= product.Price;
-                product.User.AmountOfMoney += product.Price;
 
-                _context.UserProducts.Add(transaction);
-                _context.SaveChanges();
+            user.AmountOfMoney -= product.Price*howMany;
+            product.User.AmountOfMoney += product.Price*howMany;
+            product.Quantity -= howMany;
+
+            UserProduct existingUserProduct = _context.UserProducts.
+                SingleOrDefault(n => n.ProductId == transaction.ProductId
+            && n.UserId == transaction.UserId);
+            if(existingUserProduct!=null)
+            {
+                existingUserProduct.HowManyItems += howMany;
             }
-            return "You bought " + product.Name;
+            else
+            {
+                _context.UserProducts.Add(transaction);
+            }
+            _context.SaveChanges();
+            return "You bought " + howMany + " " + product.Name;
         }
     }
 }

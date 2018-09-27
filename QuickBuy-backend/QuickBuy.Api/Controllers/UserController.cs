@@ -67,6 +67,14 @@ namespace QuickBuy.Api.Controllers
             return Ok(email);
         }
 
+        [HttpGet("GetMoneyOfLoggedUser"), Authorize]
+        public IActionResult GetMoneyOfLoggedUser()
+        {
+            var currentUser = HttpContext.User;
+            var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            return Ok(_iUserService.GetMoneyOfLoggedUser(email));
+        }
+
         [Authorize]
         public int Get()
         {

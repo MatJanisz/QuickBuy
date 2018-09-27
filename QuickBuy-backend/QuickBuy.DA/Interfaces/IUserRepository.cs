@@ -11,5 +11,6 @@ namespace QuickBuy.DA.Interfaces
         Task<bool> CreateAsync(AccountRegisterLoginDto model);
         Task<string> CreateToken(AccountRegisterLoginDto accountRegisterLoginDto);
         void AddMoney(float amount, string email);
+        float GetMoneyOfLoggedUser(string email);
     }
 }

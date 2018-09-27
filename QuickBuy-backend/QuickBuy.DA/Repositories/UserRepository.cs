@@ -71,6 +71,12 @@ namespace QuickBuy.DA.Repositories
             return BuildToken(user);
         }
 
+        public float GetMoneyOfLoggedUser(string email)
+        {
+            var user = _context.Users.Single(u => u.Email == email);
+            return user.AmountOfMoney;
+        }
+
         private string BuildToken(User user)
         {
 

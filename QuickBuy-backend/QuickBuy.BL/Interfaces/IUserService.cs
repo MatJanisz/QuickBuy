@@ -11,5 +11,6 @@ namespace QuickBuy.BL.Interfaces
         Task<bool> Create(AccountRegisterLoginViewModel model);
         Task<string> Login(AccountRegisterLoginViewModel accountRegisterLoginViewModel);
         void AddMoney(float amount, string email);
+        float GetMoneyOfLoggedUser(string email);
     }
 }

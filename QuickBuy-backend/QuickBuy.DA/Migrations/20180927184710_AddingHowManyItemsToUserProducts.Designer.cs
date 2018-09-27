@@ -12,9 +12,10 @@ using System;
 namespace QuickBuy.DA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180927184710_AddingHowManyItemsToUserProducts")]
+    partial class AddingHowManyItemsToUserProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
