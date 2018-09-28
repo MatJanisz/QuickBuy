@@ -75,7 +75,7 @@ namespace QuickBuy.Api.Controllers
             return Ok(_iUserService.GetMoneyOfLoggedUser(email));
         }
 
-        [Authorize]
+        [HttpGet, Authorize]
         public int Get()
         {
             return 5;
