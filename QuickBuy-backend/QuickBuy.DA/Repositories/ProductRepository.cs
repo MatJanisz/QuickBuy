@@ -64,13 +64,13 @@ namespace QuickBuy.DA.Repositories
         {
             var user = _context.Users.Single(u => u.Email == email);
             var userProducts = _context.UserProducts.Where(n => n.UserId == user.Id)
-                .Include(u => u.User).Include(p => p.Product);
-            foreach(var item in userProducts)
+                .Include(p => p.Product.User); //dolacza product i user w produkcie (include inside other include) !!!
+                
+            foreach (var item in userProducts)
             {
                 item.Product.Quantity = item.HowManyItems;
             }
             var products = userProducts.Select(n => n.Product);
-            products = products.Include(u => u.User);
             return _mapper.Map<List<ProductDto>>(products);
         }
 
