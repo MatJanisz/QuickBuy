@@ -1,9 +1,61 @@
-<nav class="navbar navbar-expand-md navbar-light bg-light">
-  <a class="navbar-brand" routerLink="">
-    <i class="far fa-calendar-check" style="font-size: 30px;"></i>
-    <i class="fas fa-child" style="font-size: 30px;"></i>
-    Lets Meet</a>
+<html>
+<head>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="#">
+    QucikBuy</a>
  <!-- <button (click)="toggleCollapse()" class="navbar-toggler navbar-toggler-right" type="button">
     <span class="navbar-toggler-icon"></span>
   </button> -->
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" [class.show]="false">
+      <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="#">
+              <i class="fas fa-home" style="font-size: 40px;"></i>
+              Home</a>
+          </li>
+          <ng-template [ngIf]="islogged">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="#">
+                    <i class="fas fa-user-tie" style="font-size: 40px;"></i>
+                  Manage My Products</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" routerLink="#">
+                      <i class="fas fa-shopping-cart" style="font-size: 40px;"></i>
+                    My Bought Products</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" routerLink="#">
+                      <i class="fas fa-plus" style="font-size: 40px;"></i>
+                    Add Product</a>
+              </li>
+          </ng-template>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+          <ng-template [ngIf]="!islogged">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="#">
+                <i class="fas fa-sign-in-alt" style="font-size: 40px;"></i>
+                Sign in</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="#">
+                <i class="fas fa-user-plus" style="font-size: 40px;"></i>
+                Sign up</a>
+            </li>
+          </ng-template>
+          <ng-template [ngIf]="islogged">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="#">
+                    <i class="fas fa-sign-out-alt" style="font-size: 40px;"></i>
+                  Logout</a>
+              </li>
+            </ng-template>
+      </ul>
+  </div>
 </nav>
+</html>
