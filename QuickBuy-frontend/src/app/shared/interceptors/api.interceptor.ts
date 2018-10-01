@@ -6,7 +6,9 @@ import {
   HttpRequest
 } from '@angular/common/http';
 // import { Observable } from 'rxjs/Observable'; bylo
-import { Observable } from 'rxjs';
+// import { Observable } from 'rxjs/Observable';
+import { Observable, of } from 'rxjs';
+
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {

@@ -24,7 +24,7 @@ export class SearchService {
 
   getAll(): Observable<ProductModel[]> {
     return this._http.get<ProductModel[]>(
-      this.url
+       this.url
     );
   }
   getProduct(productId: string): Observable<ProductModel> {
