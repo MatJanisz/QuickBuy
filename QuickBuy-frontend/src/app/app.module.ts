@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './shared/interceptors/api.interceptor';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ApiInterceptor } from './shared/interceptors/api.interceptor';
     ProductComponent,
     SearchComponent,
     ProductListComponent,
-    HomeComponent
+    HomeComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
