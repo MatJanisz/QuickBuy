@@ -1,5 +1,11 @@
 <div class="row">
   <div class="col">
     <app-product *ngFor="let product2 of products" [product]="product2"></app-product>
+    <ng-template [ngIf]="products.length == 0">
+      <br><br>
+      <h1>
+          <span class="badge badge-warning" style="text-align: center">Can not find product for phrase: {{keyword}}</span>
+      </h1>
+    </ng-template>
   </div>
 </div>

@@ -1,3 +1,4 @@
+import { FindComponent } from './pages/find/find.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -10,6 +11,18 @@ const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductDetailComponent
+  },
+  {
+    path: 'find/:category/:keyword',
+    component: FindComponent
+  },
+  {
+    path: 'find/:keyword',
+    component: FindComponent
+  },
+  {
+    path: 'find',
+    component: FindComponent
   }
 ];
 

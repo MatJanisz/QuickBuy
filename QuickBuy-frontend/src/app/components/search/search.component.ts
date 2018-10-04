@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../shared/enums/category.enum';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -7,8 +8,8 @@ import { Category } from '../../shared/enums/category.enum';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  category = 'abc';
-  constructor() { }
+  category = '';
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
@@ -16,11 +17,15 @@ export class SearchComponent implements OnInit {
     this.category = event.target.value;
   }
   onSearch(input: string) {
-     console.log(input);
-   /* if (input === undefined) {
+   //  console.log(input);
+    if (input === undefined) {
       input = '';
     }
-    this.router.navigateByUrl('/find/' + input); */
+    if (this.category === '') {
+      this.router.navigateByUrl('/find/' +  input);
+    } else {
+      this.router.navigateByUrl('/find/' + this.category + '/' + input);
+    }
   }
 
 }

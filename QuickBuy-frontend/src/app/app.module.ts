@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './shared/interceptors/api.interceptor';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { FindComponent } from './pages/find/find.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
     SearchComponent,
     ProductListComponent,
     HomeComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    FindComponent
   ],
   imports: [
     BrowserModule,

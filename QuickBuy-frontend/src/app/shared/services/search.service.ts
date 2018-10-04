@@ -47,6 +47,11 @@ export class SearchService {
       this.url + 'GetProductsByNameAndCategory/' + name + '/' + category
     );
   }
+  getRandomProducts(howMany: number): Observable<ProductModel[]> {
+    return this._http.get<ProductModel[]>(
+      this.url + 'GetRandomProducts/' + howMany
+    );
+  }
 
 
 
