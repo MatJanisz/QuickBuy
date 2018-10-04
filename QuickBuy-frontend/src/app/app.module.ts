@@ -16,6 +16,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './shared/interceptors/api.interceptor';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { FindComponent } from './pages/find/find.component';
+import { ProductListInitialComponent } from './components/product-list-initial/product-list-initial.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FindComponent } from './pages/find/find.component';
     ProductListComponent,
     HomeComponent,
     ProductDetailComponent,
-    FindComponent
+    FindComponent,
+    ProductListInitialComponent
   ],
   imports: [
     BrowserModule,
