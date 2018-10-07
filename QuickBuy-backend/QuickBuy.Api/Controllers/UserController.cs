@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuickBuy.BL.Interfaces;
 using QuickBuy.BL.ViewModel;
+using QuickBuy.DA.Models;
 
 namespace QuickBuy.Api.Controllers
 {
@@ -73,6 +74,22 @@ namespace QuickBuy.Api.Controllers
             var currentUser = HttpContext.User;
             var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value;
             return Ok(_iUserService.GetMoneyOfLoggedUser(email));
+        }
+
+        [HttpGet("GetDataOfLoggedUser"), Authorize]
+        public IActionResult GetDataOfLoggedUser()
+        {
+            var currentUser = HttpContext.User;
+            var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            var isAdmin = currentUser.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+            var money = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value.ToString();
+            var user = new User
+            {
+                Email = email
+             //   IsAdmin = isAdmin == "true",
+              //  AmountOfMoney = float.Parse(money)
+            };
+            return Ok(user);
         }
 
 
