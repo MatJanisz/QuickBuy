@@ -14,4 +14,11 @@ export class HeaderComponent implements OnInit {
     this.authService.logout();
   }
 
+  onTest() {
+    console.log('abc');
+    console.log(this.authService.email);
+    console.log(this.authService.money);
+    console.log(this.authService.isAdmin);
+  }
+
 }
