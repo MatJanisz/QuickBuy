@@ -17,10 +17,14 @@ export class AuthService {
 
   public isAuthenticated(): boolean {
     const token = this.getToken();
-   // if (token === 'null') {
-   //   return false;
-   // }
-   return token != null && !this.jwtHelper.isTokenExpired(token);
+    if (token === 'null') {
+      return false;
+    }
+    if (!this.jwtHelper.isTokenExpired(token)) {
+      return true;
+    }
+   // return token != null && !this.jwtHelper.isTokenExpired(token);
+   return false;
   }
 
   signUpUser(email: string, password: string) {
@@ -38,8 +42,13 @@ export class AuthService {
     );
     return this._http.post(this.url + '/Login', user).subscribe(
       (token: string) => {
-        this.router.navigate(['/']);
         localStorage.setItem('token', token['token']);
+        if (token['token'] === 'Your login or password is incorrect') {
+          localStorage.clear();
+          console.log('Your login or password is incorrect');
+        } else {
+          this.router.navigate(['/']);
+        }
       },
       error => console.log(error)
     );
