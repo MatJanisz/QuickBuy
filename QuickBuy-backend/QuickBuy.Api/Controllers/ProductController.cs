@@ -60,6 +60,13 @@ namespace QuickBuy.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetRandomProducts/{howMany}")]
+        public IActionResult GetRandomProducts(int howMany)
+        {
+            var result = _iProductService.GetRandomProducts(howMany);
+            return Ok(result);
+        }
+
         [HttpGet("GetAllMyProducts")]
         public IActionResult GetAllMyProducts()
         {

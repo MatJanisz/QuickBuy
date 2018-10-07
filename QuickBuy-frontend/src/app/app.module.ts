@@ -1,3 +1,6 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthGuardService } from './shared/services/auth-guard.service';
+import { AuthService } from './shared/services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -17,6 +20,14 @@ import { ApiInterceptor } from './shared/interceptors/api.interceptor';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { FindComponent } from './pages/find/find.component';
 import { ProductListInitialComponent } from './components/product-list-initial/product-list-initial.component';
+import { TokenInterceptor } from './shared/interceptors/token.interceptor';
+import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
+import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 
 @NgModule({
   declarations: [
@@ -29,17 +40,32 @@ import { ProductListInitialComponent } from './components/product-list-initial/p
     HomeComponent,
     ProductDetailComponent,
     FindComponent,
-    ProductListInitialComponent
+    ProductListInitialComponent,
+    SignInComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      }
+    }),
     FormsModule,
     ReactiveFormsModule
   ],
   providers: [
+    JwtHelperService,
     SearchService,
+    AuthService,
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiInterceptor,

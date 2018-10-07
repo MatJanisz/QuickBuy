@@ -46,6 +46,12 @@ namespace QuickBuy.DA.Repositories
             return _mapper.Map<List<ProductDto>>(result);
         }
 
+        public IEnumerable<ProductDto> GetRandomProducts(int howMany)
+        {
+            var result = _context.Products.Include(u => u.User).OrderBy(o => Guid.NewGuid()).Take(5);
+            return _mapper.Map<List<ProductDto>>(result);
+        }
+
         public ProductDto GetProduct(Guid id)
         {
             var product = _context.Products.Include(u => u.User).Single(n => n.Id == id);

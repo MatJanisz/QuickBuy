@@ -1,3 +1,4 @@
+import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { FindComponent } from './pages/find/find.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'find',
     component: FindComponent
+  },
+  {
+    path: 'signup',
+    component: SignUpComponent
   }
 ];
 

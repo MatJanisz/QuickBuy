@@ -44,6 +44,12 @@ namespace QuickBuy.BL.Services
             return _mapper.Map<List<ProductViewModel>>(result);
         }
 
+        public IEnumerable<ProductViewModel> GetRandomProducts(int howMany)
+        {
+            var result = _productRepository.GetRandomProducts(howMany);
+            return _mapper.Map<List<ProductViewModel>>(result);
+        }
+
         public ProductViewModel GetProduct(Guid id)
         {
             var productDto =_productRepository.GetProduct(id);
