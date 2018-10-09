@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductComponent } from './components/product/product.component';
 import { SearchComponent } from './components/search/search.component';
@@ -24,6 +23,8 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
+import { HeaderComponent } from './components/header/header.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -43,6 +44,7 @@ export function tokenGetter() {
     ProductListInitialComponent,
     SignInComponent,
     SignUpComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,

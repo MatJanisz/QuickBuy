@@ -36,12 +36,12 @@ namespace QuickBuy.Api.Controllers
             return BadRequest();
         }
 
-        [HttpGet("AddMoney/{amount}")]
-        public IActionResult AddMoney(float amount)
+        [HttpPost("AddMoney/{money}")]
+        public IActionResult AddMoney(float money)
         {
             var currentUser = HttpContext.User;
             var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value;
-            _iUserService.AddMoney(amount, email);
+            _iUserService.AddMoney(money, email);
             return Ok();
         }
 

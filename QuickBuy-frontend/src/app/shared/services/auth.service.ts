@@ -14,9 +14,7 @@ export class AuthService {
   loggedUser = new User(null, null, null);
   email: any;
   isAdmin: any;
-  money: any;
-
-
+  money: number;
 
    public getToken(): string {
     return localStorage.getItem('token');
@@ -79,7 +77,22 @@ export class AuthService {
   getMoneyOfLoggedUser() {
     return this._http.get(
       this.url + '/GetMoneyOfLoggedUser/', {responseType: 'text'})
-       .subscribe(money => this.money = money);
+       .subscribe(money => this.money = +money); // + operator change string to number
+  }
+
+  checkUserData() {
+    if (this.getToken() !== null) {
+      this.getEmailOfLoggedUser();
+      this.isLoggedUserAdmin();
+      this.getMoneyOfLoggedUser();
+    }
+  }
+  addMoney(money: number) {
+    this.money += money;
+    return this._http.post(
+      this.url + '/AddMoney/' + money, '')
+       .subscribe(log => console.log(log));
+      // .subscribe(email => console.log(email));
   }
 
   test() {
@@ -90,7 +103,7 @@ export class AuthService {
     localStorage.clear();
     this.email = '';
     this.isAdmin = '';
-    this.money = '';
+    this.money = 0;
     this.router.navigate(['/']);
   }
 }

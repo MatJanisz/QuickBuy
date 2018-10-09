@@ -1,3 +1,4 @@
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { FindComponent } from './pages/find/find.component';
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'signin',
     component: SignInComponent
+  },
+  {
+    path: 'user',
+    component: UserDetailComponent
   }
 ];
 
