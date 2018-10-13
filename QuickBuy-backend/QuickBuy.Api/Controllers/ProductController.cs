@@ -118,5 +118,17 @@ namespace QuickBuy.Api.Controllers
             var result = _iProductService.BuyProduct(id, howMany, email);
             return Ok(result);
         }
+
+        [HttpGet("testGet")]
+        public IActionResult TestGet()
+        {
+            return Ok(5);
+        }
+
+        [HttpPost("testPost")]
+        public IActionResult TestPost()
+        {
+            return Ok(7);
+        }
     }
 }

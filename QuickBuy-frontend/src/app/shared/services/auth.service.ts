@@ -99,6 +99,11 @@ export class AuthService {
     console.log(this.email);
   }
 
+  testGet() {
+    return this._http.post(
+      this.url, null);
+  }
+
   logout() {
     localStorage.clear();
     this.email = '';

@@ -93,7 +93,7 @@ namespace QuickBuy.Api.Controllers
         }
 
 
-        [HttpGet, Authorize]
+        [HttpPost, Authorize]
         public int Get()
         {
             return 5;

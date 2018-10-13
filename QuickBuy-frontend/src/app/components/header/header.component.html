@@ -44,7 +44,7 @@
           </ng-template>
           <ng-template [ngIf]="authService.isAuthenticated()">
               <li class="nav-item">
-                  <a class="nav-link" routerLink="/user" (click)="onTest()">
+                  <a class="nav-link" routerLink="/user">
                       <i class="fas fa-user" style="font-size: 40px;"></i>
                     {{authService.email}}</a>
                 </li>

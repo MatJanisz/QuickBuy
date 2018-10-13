@@ -25,6 +25,7 @@ import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { HeaderComponent } from './components/header/header.component';
+import { ProductService } from './shared/services/product.service';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -61,6 +62,7 @@ export function tokenGetter() {
   providers: [
     JwtHelperService,
     SearchService,
+    ProductService,
     AuthService,
     AuthGuardService,
     {

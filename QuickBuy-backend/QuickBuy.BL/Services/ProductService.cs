@@ -86,7 +86,7 @@ namespace QuickBuy.BL.Services
             _productRepository.DeleteProduct(id);
         }
 
-        public string BuyProduct(Guid id, int howMany, string email)
+        public int BuyProduct(Guid id, int howMany, string email)
         {
             var result = _productRepository.BuyProduct(id, howMany, email);
             return result;

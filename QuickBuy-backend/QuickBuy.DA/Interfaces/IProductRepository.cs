@@ -16,7 +16,7 @@ namespace QuickBuy.DA.Interfaces
         IEnumerable<ProductDto> GetProductsByCategory(string category);
         IEnumerable<ProductDto> GetProductsByNameAndCategory(string name, string category);
         IEnumerable<ProductDto> GetRandomProducts(int howMany);
-        string BuyProduct(Guid id, int howMany, string email);
+        int BuyProduct(Guid id, int howMany, string email);
         IEnumerable<ProductDto> GetAllMyProducts(string email);
         IEnumerable<ProductDto> GetAllMyBoughtProducts(string email);
     }

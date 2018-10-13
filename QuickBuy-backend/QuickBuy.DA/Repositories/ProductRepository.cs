@@ -108,14 +108,14 @@ namespace QuickBuy.DA.Repositories
             _context.SaveChanges();
         }
 
-        public string BuyProduct(Guid id, int howMany, string email)
+        public int BuyProduct(Guid id, int howMany, string email)
         {
             var user = _context.Users.Single(u => u.Email == email);
             var product = _context.Products.Include(u => u.User).Single(n => n.Id == id);
-            if (product.Quantity <= 0 || howMany>product.Quantity)
-                return "Product not available";
-            if (product.Price*howMany > user.AmountOfMoney)
-                return "You do not have enough money";
+            if (product.Quantity <= 0 || howMany > product.Quantity)
+                return 0; //"Product not available";
+            if (product.Price * howMany > user.AmountOfMoney)
+                return 1; //"You do not have enough money";
             var transaction = new UserProduct
             {
                 ProductId = product.Id,
@@ -139,7 +139,7 @@ namespace QuickBuy.DA.Repositories
                 _context.UserProducts.Add(transaction);
             }
             _context.SaveChanges();
-            return "You bought " + howMany + " " + product.Name;
+            return 2; //"You bought " + howMany + " " + product.Name;
         }
     }
 }

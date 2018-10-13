@@ -10,12 +10,11 @@
           </span>
     </div>
     <div class="col" style="font-size: 30px; transform: translateX(90px);">
-        <h4>
-            <i class="far fa-comment-alt" style="font-size: 25px;"></i>
-            {{ product.name }}
-            <br>
-          </h4>
-           <p >
+           <p>
+                <i class="far fa-comment-alt" style="font-size: 25px;"></i>
+                {{ product.name }}
+           </p>
+           <p>
               <i class="fas fa-dollar-sign" style="font-size: 30px;"></i>
               Price: {{product.price}}
           </p>
@@ -29,9 +28,9 @@
           </p>
           <p class="list-group-item-text">
             <i class="fas fa-dice" style="font-size: 30px;"></i>
-            Category: {{ product.category }}</p>
+            Category: {{ product.category }}
+          </p>
     </div>
-
 
   </div>
   <br>
@@ -40,8 +39,45 @@
       <i class="fas fa-font" style="font-size: 25px;"></i>
       {{ product.description }}
     </div>
-    <div class="col">
+    <div class="col" style="transform: translateX(90px);">
+        <ng-template [ngIf]="authService.isAuthenticated()">
+          <div class="block">
+              <input class="form-control"
+                [(ngModel)]="numberOfBoughtProducts"
+                style="width:100px; text-align: center; margin-bottom: 10px" type="number"
+                value="1" min="1" max="product.quantity">
+          </div>
 
+          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="onBuyNow()"
+              data-toggle="modal" data-target="#confirmationModal">Buy Now</button>
+          </ng-template>
     </div>
+   <!-- <ng-template [ngIf]="resultOfTransaction === 2">
+      <p>bought</p>
+    </ng-template> -->
   </div>
+</div>
+
+<!-- Modal Transaction has been accepted -->
+<div id="confirmationModal" class="modal fade"  role="alert">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+        <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4 class="modal-title">
+           <!-- <span style="text-align: center">Success</span>-->
+           <p *ngIf="resultOfTransaction < 2" style="color: #da4011; transform: translateX(80px)">Error</p>
+           <p *ngIf="resultOfTransaction === 2" style="color: rgb(24, 202, 24); transform: translateX(80px)">Success !</p>
+          </h4>
+        </div>
+        <div class="modal-body">
+          <p *ngIf="resultOfTransaction === 0" class="center">There is no enough products.</p>
+          <p *ngIf="resultOfTransaction === 1" class="center">You do not have enough money.</p>
+          <p *ngIf="resultOfTransaction === 2" class="center">You have bought {{numberOfBoughtProducts}} product(s).</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+    </div>
 </div>
