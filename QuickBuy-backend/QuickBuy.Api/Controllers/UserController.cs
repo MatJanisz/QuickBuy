@@ -36,7 +36,7 @@ namespace QuickBuy.Api.Controllers
             return BadRequest();
         }
 
-        [HttpPost("AddMoney/{money}")]
+        [HttpPost("AddMoney/{money}"), Authorize]
         public IActionResult AddMoney(float money)
         {
             var currentUser = HttpContext.User;

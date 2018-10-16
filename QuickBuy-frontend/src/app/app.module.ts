@@ -26,6 +26,11 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ProductService } from './shared/services/product.service';
+import { AddProductComponent } from './pages/add-product/add-product.component';
+import { CategoryPipe } from './shared/pipes/category.pipe';
+import { MyBoughtProductsComponent } from './pages/my-bought-products/my-bought-products.component';
+import { MyBoughtProductListComponent } from './components/my-bought-product-list/my-bought-product-list.component';
+import { MyBoughtProductComponent } from './components/my-bought-product/my-bought-product.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -46,6 +51,11 @@ export function tokenGetter() {
     SignInComponent,
     SignUpComponent,
     UserDetailComponent,
+    AddProductComponent,
+    CategoryPipe,
+    MyBoughtProductsComponent,
+    MyBoughtProductListComponent,
+    MyBoughtProductComponent,
   ],
   imports: [
     BrowserModule,

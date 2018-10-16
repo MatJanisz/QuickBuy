@@ -1,3 +1,5 @@
+import { MyBoughtProductsComponent } from './pages/my-bought-products/my-bought-products.component';
+import { AddProductComponent } from './pages/add-product/add-product.component';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
 import { SignInComponent } from './pages/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/auth/sign-up/sign-up.component';
@@ -6,6 +8,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { AuthGuardService } from './shared/services/auth-guard.service';
 const routes: Routes = [
   {
     path: '',
@@ -37,7 +40,18 @@ const routes: Routes = [
   },
   {
     path: 'user',
-    component: UserDetailComponent
+    component: UserDetailComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'addProduct',
+    component: AddProductComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'myBoughtProducts',
+    component: MyBoughtProductsComponent,
+    canActivate: [AuthGuardService]
   }
 ];
 
