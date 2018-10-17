@@ -1,3 +1,4 @@
+import { EditProductComponent } from './pages/edit-product/edit-product.component';
 import { MyBoughtProductsComponent } from './pages/my-bought-products/my-bought-products.component';
 import { AddProductComponent } from './pages/add-product/add-product.component';
 import { UserDetailComponent } from './pages/user-detail/user-detail.component';
@@ -9,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import { MyProductsComponent } from './pages/my-products/my-products.component';
 const routes: Routes = [
   {
     path: '',
@@ -51,6 +53,16 @@ const routes: Routes = [
   {
     path: 'myBoughtProducts',
     component: MyBoughtProductsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'myProducts',
+    component: MyProductsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'editProduct/:id',
+    component: EditProductComponent,
     canActivate: [AuthGuardService]
   }
 ];

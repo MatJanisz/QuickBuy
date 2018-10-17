@@ -1,0 +1,88 @@
+<br/>
+<div class="main container">
+    <div class="row">
+      <div>
+        <form (ngSubmit)="onEditProduct(f)" #f="ngForm">
+          <div class="form-group>">
+            <h5>
+              <div class="row">
+                <div class="col">
+                    <i class="far fa-comment-alt" style="font-size: 25px; padding-right: 5px;"></i>
+                    <label for="name">Name:</label>
+                    <input [(ngModel)]="productDetails.name" type="text" name="title" ngModel class="form-control">
+                </div>
+                <div class="col">
+                    <i class="fas fa-dice" style="font-size: 30px; transform: translateX(-10px); padding-right: 5px;"></i>
+                    <label for="quantity" style="transform: translateX(-10px)">Category:</label>
+                    <select [ngModel]="productDetails.category" name="category" ngModel class="form-control" style="transform: translateY(-5px)">
+                        <option *ngFor="let item of categories | category" [value]="item.key">{{item.value}}</option>
+                    </select>
+                </div>
+              </div>
+              <br/>
+              <div class="row">
+                <div class="col">
+                    <i class="fas fa-dollar-sign" style="font-size: 30px; padding-right: 5px;"></i>
+                    <label for="price">Price:</label>
+                    <input [(ngModel)]="productDetails.price" type="number" min="1" value="1" name="price" ngModel class="form-control">
+                </div>
+                <div class="col">
+                    <i class="fas fa-check-square" style="font-size: 30px; padding-right: 5px;"></i>
+                    <label for="quantity">Quantity:</label>
+                    <input [(ngModel)]="productDetails.quantity" type="number" min="1" value="1" name="quantity" ngModel class="form-control">
+                </div>
+              </div>
+              <br/>
+              <div class="row" style="transform: translateX(15px)">
+                  <i class="fas fa-pencil-alt" style="font-size: 20px; padding-right: 5px;"></i>
+                  <label for="description">Description:</label>
+                  <textarea [(ngModel)]="productDetails.description" type="text" name="description" rows="3" placeholder="Describe your product" ngModel class="form-control"></textarea>
+              </div>
+              <br/>
+              <div class="row" style="transform: translateX(15px)">
+                  <i class="fas fa-camera" style="font-size: 30px; padding-right: 6px;"></i>
+                  <div class="form-group">
+                      <div class="form-control">
+                          <label class="checkbox-inline checkbox-bootstrap checkbox-lg">
+                              <input type="checkbox"
+                              name="isActive"
+                              [(ngModel)]="isPhotoChecked">
+                              <span class="checkbox-placeholder"></span>
+                              Change Photo ?
+                            </label>
+                      </div>
+                    </div>
+              </div>
+              <ng-template [ngIf]="isPhotoChecked" style="transform: translateX(15px)">
+                  <div class="row" style="transform: translateX(15px)">
+                      <input [(ngModel)]="productDetails.imageSource" type="url" name="path" placeholder="url" ngModel class="form-control">
+                  </div>
+              </ng-template>
+          </h5>
+          </div>
+          <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">Edit Product</button>
+        </form>
+      </div>
+    </div>
+</div>
+
+<!-- Modal Transaction has been accepted -->
+<div id="confirmationModal" class="modal fade"  role="alert">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+      <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        <h4 class="modal-title">
+         <!-- <span style="text-align: center">Success</span>-->
+         <p style="color: rgb(24, 202, 24); transform: translateX(80px)">Success !</p>
+        </h4>
+      </div>
+      <div class="modal-body">
+        <p class="center">You edited product.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

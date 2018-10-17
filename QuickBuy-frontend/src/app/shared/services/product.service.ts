@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AddProductModel } from 'src/app/shared/models/addProduct.model';
+import { EditProductModel } from '../models/editProduct.model';
 
 @Injectable()
 export class ProductService {
@@ -29,5 +30,13 @@ export class ProductService {
   getAllMyBoughtProducts(): Observable<ProductModel[]> {
     return this._http.get<ProductModel[]>(
       this.url + 'GetAllMyBoughtProducts');
+  }
+  getAllMyProducts(): Observable<ProductModel[]> {
+    return this._http.get<ProductModel[]>(
+      this.url + 'GetAllMyProducts');
+  }
+  editProduct(product: EditProductModel) {
+    return this._http.put(
+      this.url, product);
   }
 }

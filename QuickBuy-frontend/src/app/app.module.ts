@@ -31,6 +31,10 @@ import { CategoryPipe } from './shared/pipes/category.pipe';
 import { MyBoughtProductsComponent } from './pages/my-bought-products/my-bought-products.component';
 import { MyBoughtProductListComponent } from './components/my-bought-product-list/my-bought-product-list.component';
 import { MyBoughtProductComponent } from './components/my-bought-product/my-bought-product.component';
+import { MyProductsComponent } from './pages/my-products/my-products.component';
+import { MyProductListComponent } from './components/my-product-list/my-product-list.component';
+import { MyProductComponent } from './components/my-product/my-product.component';
+import { EditProductComponent } from './pages/edit-product/edit-product.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -56,6 +60,10 @@ export function tokenGetter() {
     MyBoughtProductsComponent,
     MyBoughtProductListComponent,
     MyBoughtProductComponent,
+    MyProductsComponent,
+    MyProductListComponent,
+    MyProductComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,

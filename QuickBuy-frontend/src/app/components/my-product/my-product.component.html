@@ -1,0 +1,31 @@
+<a routerLink="/editProduct/{{ product.id }}" class="list-group-item clearfix">
+  <div class="float-left">
+    <h3 class="list-group-item-heading">
+      <p>
+        <i class="far fa-comment-alt" style="font-size: 30px;"></i>
+        {{ product.name }}
+      </p>
+    </h3>
+    <h5>
+      <p >
+          <i class="fas fa-dollar-sign" style="font-size: 30px;"></i>
+          Price: {{product.price}}
+      </p>
+      <p>
+          <i class="fas fa-check-square" style="font-size: 30px;"></i>
+          Quantity: {{product.quantity}}
+      </p>
+      <p class="list-group-item-text">
+        <i class="fas fa-dice" style="font-size: 30px;"></i>
+        Category: {{ product.category }}</p>
+    </h5>
+  </div>
+  <div class="float-right">
+      <span class="pull-right">
+          <img [src]="product.imageSource"
+          alt="{{product.name}}"
+          class="img-responsive" style="max-height: 220px; transform: translateX(-100px);">
+        </span>
+  </div>
+</a>
+<p></p>

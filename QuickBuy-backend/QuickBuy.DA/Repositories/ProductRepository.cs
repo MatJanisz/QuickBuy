@@ -96,6 +96,7 @@ namespace QuickBuy.DA.Repositories
             var user = _context.Users.Single(u => u.Email == email);
             if(productInDb.OwnerId == user.Id)
             {
+                productObject.OwnerId = user.Id;
                 _context.Entry(productInDb).CurrentValues.SetValues(productObject);
                 _context.SaveChanges();
             }
