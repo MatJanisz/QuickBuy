@@ -56,6 +56,31 @@ namespace QuickBuy.DA.Repositories
             _context.SaveChanges();
         }
 
+        public void ChangeIsBlockedStatus(string id, string email)
+        {
+            var user = _context.Users.Single(u => u.Email == email);
+            if(user.IsAdmin)
+            {
+                var requiredUser = _context.Users.Single(u => u.Id == id);
+                if (!requiredUser.IsBlocked)
+                {
+                    requiredUser.IsBlocked = true;
+                }
+                else
+                {
+                    requiredUser.IsBlocked = false;
+                }
+                _context.SaveChanges();
+            }
+        }
+
+        public IEnumerable<UserDto> GetAllUsers()
+        {
+            var result = _context.Users.ToList();
+            return _mapper.Map<List<UserDto>>(result);
+
+        }
+
         public async Task<string> CreateToken(AccountRegisterLoginDto accountRegisterLoginDto)
         {
             var user = await _userManager.FindByEmailAsync(accountRegisterLoginDto.Email);
@@ -75,6 +100,12 @@ namespace QuickBuy.DA.Repositories
         {
             var user = _context.Users.Single(u => u.Email == email);
             return user.AmountOfMoney;
+        }
+
+        public bool IsLoggedUserBlocked(string email)
+        {
+            var user = _context.Users.Single(u => u.Email == email);
+            return user.IsBlocked;
         }
 
         private string BuildToken(User user)

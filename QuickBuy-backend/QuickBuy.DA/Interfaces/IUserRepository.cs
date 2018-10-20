@@ -12,5 +12,8 @@ namespace QuickBuy.DA.Interfaces
         Task<string> CreateToken(AccountRegisterLoginDto accountRegisterLoginDto);
         void AddMoney(float amount, string email);
         float GetMoneyOfLoggedUser(string email);
+        void ChangeIsBlockedStatus(string id, string email);
+        bool IsLoggedUserBlocked(string email);
+        IEnumerable<UserDto> GetAllUsers();
     }
 }

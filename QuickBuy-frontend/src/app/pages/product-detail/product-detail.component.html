@@ -40,7 +40,7 @@
       {{ product.description }}
     </div>
     <div class="col" style="transform: translateX(90px);">
-        <ng-template [ngIf]="authService.isAuthenticated()">
+        <ng-template [ngIf]="authService.isAuthenticated() && !authService.isUserBlocked()">
           <div class="block">
               <input class="form-control"
                 [(ngModel)]="numberOfBoughtProducts"

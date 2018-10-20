@@ -45,13 +45,6 @@ export class EditProductComponent implements OnInit {
       this.productDetails.imageSource,
       this.productDetails.description
     );
-    console.log(editedProduct.id);
-    console.log(editedProduct.name);
-    console.log(editedProduct.price);
-    console.log(editedProduct.quantity);
-    console.log(editedProduct.category);
-    console.log(editedProduct.imageSource);
-    console.log(editedProduct.description);
      this.productService.editProduct(editedProduct)
       .subscribe(response => console.log(response), error => console.log(error));
 

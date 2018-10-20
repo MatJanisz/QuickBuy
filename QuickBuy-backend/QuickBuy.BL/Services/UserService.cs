@@ -39,9 +39,26 @@ namespace QuickBuy.BL.Services
             return result;
         }
 
+        public void ChangeIsBlockedStatus(string id, string email)
+        {
+            _userRepository.ChangeIsBlockedStatus(id, email);
+        }
+
         public float GetMoneyOfLoggedUser(string email)
         {
             return _userRepository.GetMoneyOfLoggedUser(email);
         }
+
+        public bool IsLoggedUserBlocked(string email)
+        {
+            return _userRepository.IsLoggedUserBlocked(email);
+        }
+
+        public IEnumerable<UserViewModel> GetAllUsers()
+        {
+            var result = _userRepository.GetAllUsers();
+            return _mapper.Map<List<UserViewModel>>(result);
+        }
+
     }
 }

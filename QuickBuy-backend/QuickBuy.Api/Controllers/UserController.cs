@@ -64,8 +64,16 @@ namespace QuickBuy.Api.Controllers
         public IActionResult IsLoggedUserAdmin()
         {
             var currentUser = HttpContext.User;
-            var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Role).Value;
-            return Ok(email);
+            var result = currentUser.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+            return Ok(result);
+        }
+
+        [HttpGet("IsLoggedUserBlocked"), Authorize]
+        public IActionResult IsLoggedUserBlocked()
+        {
+            var currentUser = HttpContext.User;
+            var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            return Ok(_iUserService.IsLoggedUserBlocked(email).ToString());
         }
 
         [HttpGet("GetMoneyOfLoggedUser"), Authorize]
@@ -90,6 +98,20 @@ namespace QuickBuy.Api.Controllers
               //  AmountOfMoney = float.Parse(money)
             };
             return Ok(user);
+        }
+
+        [HttpGet("GetAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            return Ok(_iUserService.GetAllUsers());
+        }
+
+        [HttpPost("ChangeIsBlockedStatus/{id}"), Authorize]
+        public void ChangeIsBlockedStatus(string id)
+        {
+            var currentUser = HttpContext.User;
+            var email = currentUser.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+            _iUserService.ChangeIsBlockedStatus(id, email);
         }
 
 

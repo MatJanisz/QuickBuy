@@ -14,6 +14,7 @@ namespace QuickBuy.DA.Dto
             CreateMap<Product, ProductDto>()
                 .ForMember(dest => dest.OwnerEmail, opt => opt.MapFrom(src => src.User.Email))
                 .ReverseMap();
+            CreateMap<UserDto, User>().ReverseMap();
         }
     }
 }

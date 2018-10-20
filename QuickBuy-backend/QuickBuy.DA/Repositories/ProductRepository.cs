@@ -48,7 +48,7 @@ namespace QuickBuy.DA.Repositories
 
         public IEnumerable<ProductDto> GetRandomProducts(int howMany)
         {
-            var result = _context.Products.Include(u => u.User).OrderBy(o => Guid.NewGuid()).Take(5);
+            var result = _context.Products.Include(u => u.User).OrderBy(o => Guid.NewGuid()).Take(howMany);
             return _mapper.Map<List<ProductDto>>(result);
         }
 

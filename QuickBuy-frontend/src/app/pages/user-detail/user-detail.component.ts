@@ -12,7 +12,6 @@ export class UserDetailComponent implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.checkUserData();
   }
   onAdd(input: number) {
       this.authService.addMoney(Math.abs(input));

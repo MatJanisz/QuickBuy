@@ -1,3 +1,4 @@
+import { AuthService } from './../../shared/services/auth.service';
 import { AddProductModel } from './../../shared/models/addProduct.model';
 import { Category } from './../../shared/enums/category.enum';
 import { Component, OnInit } from '@angular/core';
@@ -13,9 +14,10 @@ import { NgForm } from '@angular/forms';
 export class AddProductComponent implements OnInit {
   isPhotoChecked = false;
   categories = Category;
-  constructor(private productService: ProductService, router: Router) { }
+  constructor(private productService: ProductService, public authService: AuthService, router: Router) { }
 
   ngOnInit() {
+    this.authService.checkUserData();
   }
 
   onCreate() {

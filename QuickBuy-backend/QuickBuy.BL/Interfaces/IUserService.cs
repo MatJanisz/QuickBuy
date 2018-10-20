@@ -12,5 +12,8 @@ namespace QuickBuy.BL.Interfaces
         Task<string> Login(AccountRegisterLoginViewModel accountRegisterLoginViewModel);
         void AddMoney(float amount, string email);
         float GetMoneyOfLoggedUser(string email);
+        void ChangeIsBlockedStatus(string id, string email);
+        bool IsLoggedUserBlocked(string email);
+        IEnumerable<UserViewModel> GetAllUsers();
     }
 }

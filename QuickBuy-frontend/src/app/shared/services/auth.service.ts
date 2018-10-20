@@ -11,10 +11,11 @@ import { User } from '../models/user.model';
 export class AuthService {
   constructor(private _http: HttpClient, private router: Router,  private jwtHelper: JwtHelperService ) {}
   url = 'User';
-  loggedUser = new User(null, null, null);
+  loggedUser = new User(null, null, null, null, null);
   email: any;
-  isAdmin: any;
   money: number;
+  isAdmin: any;
+  isBlocked: any;
 
    public getToken(): string {
     return localStorage.getItem('token');
@@ -30,6 +31,18 @@ export class AuthService {
     }
    // return token != null && !this.jwtHelper.isTokenExpired(token);
    return false;
+  }
+  isUserAdmin(): boolean {
+    if (this.isAdmin === 'True') {
+      return true;
+    }
+    return false;
+  }
+  isUserBlocked(): boolean {
+    if (this.isBlocked === 'True') {
+      return true;
+    }
+    return false;
   }
 
   signUpUser(email: string, password: string) {
@@ -55,7 +68,10 @@ export class AuthService {
           this.getEmailOfLoggedUser();
           this.isLoggedUserAdmin();
           this.getMoneyOfLoggedUser();
+          this.isLoggedUserBlocked();
           this.router.navigate(['/']);
+          console.log(this.isBlocked);
+          console.log(this.isUserAdmin());
         }
       },
       error => console.log(error)
@@ -74,6 +90,12 @@ export class AuthService {
        .subscribe(isAdmin => this.isAdmin = isAdmin);
   }
 
+  isLoggedUserBlocked() {
+    return this._http.get(
+      this.url + '/IsLoggedUserBlocked/', {responseType: 'text'})
+       .subscribe(isBlocked => this.isBlocked = isBlocked);
+  }
+
   getMoneyOfLoggedUser() {
     return this._http.get(
       this.url + '/GetMoneyOfLoggedUser/', {responseType: 'text'})
@@ -85,6 +107,7 @@ export class AuthService {
       this.getEmailOfLoggedUser();
       this.isLoggedUserAdmin();
       this.getMoneyOfLoggedUser();
+      this.isLoggedUserBlocked();
     }
   }
   addMoney(money: number) {

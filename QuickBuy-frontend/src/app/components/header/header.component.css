@@ -1,0 +1,4 @@
+.disabled {
+  pointer-events: inherit;
+  cursor: not-allowed;
+}

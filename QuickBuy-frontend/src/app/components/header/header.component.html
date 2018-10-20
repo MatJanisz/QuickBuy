@@ -17,6 +17,8 @@
                     <i class="fas fa-user-tie" style="font-size: 40px;"></i>
                   Manage My Products</a>
               </li>
+             <!-- <a class="nav-link" style="cursor: not-allowed;" routerLink="myProducts">
+                <i class="fas fa-user-tie" style="font-size: 40px; cursor: not-allowed"></i> -->
               <li class="nav-item">
                   <a class="nav-link" routerLink="/myBoughtProducts">
                       <i class="fas fa-shopping-cart" style="font-size: 40px;"></i>
@@ -41,6 +43,13 @@
                 <i class="fas fa-user-plus" style="font-size: 40px;"></i>
                 Sign up</a>
             </li>
+          </ng-template>
+          <ng-template [ngIf]="authService.isUserAdmin()">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/user">
+                    <i class="far fa-address-book" style="font-size: 40px;"></i>
+                  Manage Users</a>
+              </li>
           </ng-template>
           <ng-template [ngIf]="authService.isAuthenticated()">
               <li class="nav-item">
