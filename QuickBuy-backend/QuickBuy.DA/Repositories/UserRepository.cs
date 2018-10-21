@@ -108,6 +108,20 @@ namespace QuickBuy.DA.Repositories
             return user.IsBlocked;
         }
 
+        public int GetNumberOfBoughtItems(string id)
+        {
+            var userProducts = _context.UserProducts.ToList();
+            int result = 0;
+            foreach(var item in userProducts)
+            {
+                if(item.UserId.ToString() == id)
+                {
+                    result += item.HowManyItems;
+                }
+            }
+            return result;
+        }
+
         private string BuildToken(User user)
         {
 

@@ -56,8 +56,13 @@ namespace QuickBuy.BL.Services
 
         public IEnumerable<UserViewModel> GetAllUsers()
         {
-            var result = _userRepository.GetAllUsers();
-            return _mapper.Map<List<UserViewModel>>(result);
+            var users = _userRepository.GetAllUsers();
+            var result = _mapper.Map<List<UserViewModel>>(users);
+            foreach(var user in result)
+            {
+                user.NumberOfBoughtItems = _userRepository.GetNumberOfBoughtItems(user.Id.ToString());
+            }
+            return result;
         }
 
     }

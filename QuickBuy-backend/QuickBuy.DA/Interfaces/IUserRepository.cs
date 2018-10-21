@@ -15,5 +15,6 @@ namespace QuickBuy.DA.Interfaces
         void ChangeIsBlockedStatus(string id, string email);
         bool IsLoggedUserBlocked(string email);
         IEnumerable<UserDto> GetAllUsers();
+        int GetNumberOfBoughtItems(string id);
     }
 }

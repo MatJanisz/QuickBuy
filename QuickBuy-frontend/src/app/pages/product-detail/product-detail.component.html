@@ -41,20 +41,23 @@
     </div>
     <div class="col" style="transform: translateX(90px);">
         <ng-template [ngIf]="authService.isAuthenticated() && !authService.isUserBlocked()">
-          <div class="block">
+         <!-- <div class="block"> -->
+           <div class="row">
               <input class="form-control"
-                [(ngModel)]="numberOfBoughtProducts"
-                style="width:100px; text-align: center; margin-bottom: 10px" type="number"
-                value="1" min="1" max="product.quantity">
-          </div>
+              name="howMany"
+              [(ngModel)]="numberOfBoughtProducts"
+              style="width:100px; text-align: center; margin-bottom: 10px" type="number"
+              value="1" min="1" max="product.quantity">
+              <label style="margin: 5px;">pieces</label>
 
-          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="onBuyNow()"
-              data-toggle="modal" data-target="#confirmationModal">Buy Now</button>
+           </div>
+           <div class="row">
+              <button type="button" class="btn btn-primary btn-lg btn-block" (click)="onBuyNow()"
+                data-toggle="modal" data-target="#confirmationModal">Buy Now
+              </button>
+          </div>
           </ng-template>
     </div>
-   <!-- <ng-template [ngIf]="resultOfTransaction === 2">
-      <p>bought</p>
-    </ng-template> -->
   </div>
 </div>
 

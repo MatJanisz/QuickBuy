@@ -35,6 +35,9 @@ import { MyProductsComponent } from './pages/my-products/my-products.component';
 import { MyProductListComponent } from './components/my-product-list/my-product-list.component';
 import { MyProductComponent } from './components/my-product/my-product.component';
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
+import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
+import { ManageUserListComponent } from './components/manage-user-list/manage-user-list.component';
+import { ManageUserComponent } from './components/manage-user/manage-user.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -64,6 +67,9 @@ export function tokenGetter() {
     MyProductListComponent,
     MyProductComponent,
     EditProductComponent,
+    ManageUsersComponent,
+    ManageUserListComponent,
+    ManageUserComponent,
   ],
   imports: [
     BrowserModule,

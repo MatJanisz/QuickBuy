@@ -1,3 +1,4 @@
+import { ManageUsersComponent } from './pages/manage-users/manage-users.component';
 import { EditProductComponent } from './pages/edit-product/edit-product.component';
 import { MyBoughtProductsComponent } from './pages/my-bought-products/my-bought-products.component';
 import { AddProductComponent } from './pages/add-product/add-product.component';
@@ -63,6 +64,11 @@ const routes: Routes = [
   {
     path: 'editProduct/:id',
     component: EditProductComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'manageUsers',
+    component: ManageUsersComponent,
     canActivate: [AuthGuardService]
   }
 ];

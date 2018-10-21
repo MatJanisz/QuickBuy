@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { AuthenticationUserModel } from '../models/authenticationUser.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { tokenGetter} from './../../app.module';
-import { User } from '../models/user.model';
+import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class AuthService {
   constructor(private _http: HttpClient, private router: Router,  private jwtHelper: JwtHelperService ) {}
   url = 'User';
-  loggedUser = new User(null, null, null, null, null);
+  loggedUser = new UserModel(null, null, null, null, null, null);
   email: any;
   money: number;
   isAdmin: any;
@@ -70,8 +70,6 @@ export class AuthService {
           this.getMoneyOfLoggedUser();
           this.isLoggedUserBlocked();
           this.router.navigate(['/']);
-          console.log(this.isBlocked);
-          console.log(this.isUserAdmin());
         }
       },
       error => console.log(error)
@@ -117,7 +115,14 @@ export class AuthService {
        .subscribe(log => console.log(log));
       // .subscribe(email => console.log(email));
   }
-
+  getAllUsers(): Observable<UserModel[]> {
+    return this._http.get<UserModel[]>(
+      this.url + '/GetAllUsers');
+  }
+  changeIsBlockedStatus(id: string) {
+    return this._http.post(
+      this.url + '/ChangeIsBlockedStatus/' + id, null);
+  }
   test() {
     console.log(this.email);
   }

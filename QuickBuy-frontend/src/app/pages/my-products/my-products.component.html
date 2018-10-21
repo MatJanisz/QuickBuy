@@ -4,10 +4,12 @@
         <ng-template [ngIf]="!authService.isUserBlocked()">
             <app-my-product-list></app-my-product-list>
         </ng-template>
-        <br><br>
-        <h1>
-            <span class="badge badge-danger" style="text-align: center">Your account is blocked !</span>
-        </h1>
+        <ng-template [ngIf]="authService.isUserBlocked()">
+            <br><br>
+            <h1>
+                <span class="badge badge-danger" style="text-align: center">Your account is blocked !</span>
+            </h1>
+        </ng-template>
     </div>
   </div>
 </div>
