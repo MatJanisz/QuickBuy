@@ -8,7 +8,7 @@ import { AuthService } from '../../../shared/services/auth.service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
+  isPasswordValid = true;
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
@@ -17,11 +17,17 @@ export class SignUpComponent implements OnInit {
   onSignUp(form: NgForm) {
     const email = form.value.email;
     const password = form.value.password;
-    this.authService
+    console.log(password);
+    if (password.search('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$') !== -1) {
+      this.isPasswordValid = true;
+      this.authService
       .signUpUser(email, password)
       .subscribe(
         response => console.log(response),
         error => console.log(error)
       );
+    } else {
+      this.isPasswordValid = false;
+    }
   }
 }

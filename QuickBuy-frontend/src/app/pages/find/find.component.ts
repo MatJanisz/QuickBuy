@@ -12,7 +12,6 @@ export class FindComponent implements OnInit {
   category: string;
   constructor(
     private route: ActivatedRoute,
-   // private router: Router
   ) {
     this.route.params.subscribe((params: Params) => {
       if (params['category'] === undefined) {
@@ -25,8 +24,6 @@ export class FindComponent implements OnInit {
       } else {
         this.keyword = '' + params['keyword'];
       }
-      // console.log('keyword: ' + this.keyword);
-      // console.log('category: ' + this.category);
     });
   }
   ngOnInit() {

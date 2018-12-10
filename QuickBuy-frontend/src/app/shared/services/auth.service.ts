@@ -29,7 +29,6 @@ export class AuthService {
     if (!this.jwtHelper.isTokenExpired(token)) {
       return true;
     }
-   // return token != null && !this.jwtHelper.isTokenExpired(token);
    return false;
   }
   isUserAdmin(): boolean {

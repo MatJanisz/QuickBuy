@@ -17,7 +17,6 @@ export class SearchComponent implements OnInit {
     this.category = event.target.value;
   }
   onSearch(input: string) {
-   //  console.log(input);
     if (input === undefined) {
       input = '';
     }

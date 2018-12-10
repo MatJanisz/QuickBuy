@@ -16,8 +16,6 @@ export class ProductListInitialComponent implements OnInit {
   constructor(private searchService: SearchService) { }
 
   ngOnInit() {
-   //  console.log(this.keyword);
-    // console.log(this.category);
     this.searchService
       .getRandomProducts(5)
       .subscribe(initialProducts => (this.initialProducts = initialProducts), error => console.log(error));

@@ -24,7 +24,7 @@ namespace QuickBuy.BL.Services
         public async Task<bool> Create(AccountRegisterLoginViewModel model)
         {
             var accountDto = _mapper.Map<AccountRegisterLoginDto>(model);
-            return await _userRepository.CreateAsync(accountDto);
+            return await _userRepository.Register(accountDto);
         }
 
         public void AddMoney(float amount, string email)
@@ -35,7 +35,7 @@ namespace QuickBuy.BL.Services
         public Task<string> Login(AccountRegisterLoginViewModel model)
         {
             var accountDto = _mapper.Map<AccountRegisterLoginDto>(model);
-            var result = _userRepository.CreateToken(accountDto);
+            var result = _userRepository.Login(accountDto);
             return result;
         }
 

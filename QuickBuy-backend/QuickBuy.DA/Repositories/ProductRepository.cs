@@ -123,24 +123,12 @@ namespace QuickBuy.DA.Repositories
                 UserId = user.Id,
                 HowManyItems = howMany
             };
-
             user.AmountOfMoney -= product.Price*howMany;
             product.User.AmountOfMoney += product.Price*howMany;
             product.Quantity -= howMany;
-
-            UserProduct existingUserProduct = _context.UserProducts.
-                SingleOrDefault(n => n.ProductId == transaction.ProductId
-            && n.UserId == transaction.UserId);
-            if(existingUserProduct!=null)
-            {
-                existingUserProduct.HowManyItems += howMany;
-            }
-            else
-            {
-                _context.UserProducts.Add(transaction);
-            }
+            _context.UserProducts.Add(transaction);
             _context.SaveChanges();
-            return 2; //"You bought " + howMany + " " + product.Name;
+            return 2; //"You bought product;
         }
     }
 }

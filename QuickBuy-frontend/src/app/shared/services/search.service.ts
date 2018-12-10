@@ -8,20 +8,6 @@ export class SearchService {
   constructor(private _http: HttpClient) {}
   url = 'product/';
 
-  /*getEvents(searchInput: string): Observable<EventListModel[]> {
-    return this._http.get<EventListModel[]>(
-      this.url + 'geteventswithhostnames/' + searchInput
-    );
-  }
-  getEventParticipantNumber(eventId: string): Observable<number> {
-    return this._http.get<number>(
-      this.url + 'GetNumberEventParticipants/' + eventId
-    );
-  }
-  getPopularEvents(): Observable<EventListModel[]> {
-    return this._http.get<EventListModel[]>(this.url + 'GetMostPopularEvents/');
-  }*/
-
   getAll(): Observable<ProductModel[]> {
     return this._http.get<ProductModel[]>(
        this.url

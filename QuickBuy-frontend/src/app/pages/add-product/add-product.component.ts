@@ -21,7 +21,6 @@ export class AddProductComponent implements OnInit {
   }
 
   onCreate() {
-    console.log('abc');
   }
   onAddProduct(form: NgForm) {
     const product: AddProductModel = new AddProductModel(

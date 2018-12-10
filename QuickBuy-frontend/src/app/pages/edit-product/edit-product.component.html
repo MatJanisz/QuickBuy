@@ -1,7 +1,8 @@
 <br/>
 <div class="main container">
     <div class="row">
-      <div>
+      <div class="col-md-2"></div>
+      <div class="col-md-6">
         <form (ngSubmit)="onEditProduct(f)" #f="ngForm">
           <div class="form-group>">
             <h5>
@@ -63,6 +64,7 @@
           <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal">Edit Product</button>
         </form>
       </div>
+      <div class="col-md-3"></div>
     </div>
 </div>
 
@@ -71,14 +73,12 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-      <!--  <button type="button" class="close" data-dismiss="modal">&times;</button> -->
         <h4 class="modal-title">
-         <!-- <span style="text-align: center">Success</span>-->
          <p style="color: rgb(24, 202, 24); transform: translateX(80px)">Success !</p>
         </h4>
       </div>
       <div class="modal-body">
-        <p class="center">You edited product.</p>
+        <p style="transform: translateX(60px)">You edited product.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>

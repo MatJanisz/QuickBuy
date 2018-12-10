@@ -18,13 +18,11 @@ namespace QuickBuy.Api.Controllers
     {
         private readonly IUserService _iUserService;
         private readonly IMapper _mapper;
-        //private IConfiguration _config;
 
-        public UserController(IUserService iUserService, IMapper mapper /*IConfiguration config*/)
+        public UserController(IUserService iUserService, IMapper mapper)
         {
             _iUserService = iUserService;
             _mapper = mapper;
-          //  _config = config;
         }
 
         [HttpPost("Register")]

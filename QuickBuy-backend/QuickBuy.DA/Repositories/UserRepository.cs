@@ -37,7 +37,7 @@ namespace QuickBuy.DA.Repositories
             _mapper = mapper;
         }
 
-        public async Task<bool> CreateAsync(AccountRegisterLoginDto model)
+        public async Task<bool> Register(AccountRegisterLoginDto model)
         {
             var user = _mapper.Map<User>(model);
             user.UserName = model.Email;
@@ -56,23 +56,18 @@ namespace QuickBuy.DA.Repositories
             _context.SaveChanges();
         }
 
-        public void ChangeIsBlockedStatus(string id, string email)
-        {
-            var user = _context.Users.Single(u => u.Email == email);
-            if(user.IsAdmin)
-            {
-                var requiredUser = _context.Users.Single(u => u.Id == id);
-                if (!requiredUser.IsBlocked)
-                {
-                    requiredUser.IsBlocked = true;
-                }
-                else
-                {
-                    requiredUser.IsBlocked = false;
-                }
-                _context.SaveChanges();
-            }
-        }
+         public void ChangeIsBlockedStatus(string id, string email)
+         {
+             var user = _context.Users.Single(u => u.Email == email);
+             if(user.IsAdmin)
+             {
+                 var requiredUser = _context.Users.Single(u => u.Id == id);
+                 requiredUser.IsBlocked = !requiredUser.IsBlocked;
+                 _context.SaveChanges();
+             }
+         }
+
+
 
         public IEnumerable<UserDto> GetAllUsers()
         {
@@ -81,14 +76,15 @@ namespace QuickBuy.DA.Repositories
 
         }
 
-        public async Task<string> CreateToken(AccountRegisterLoginDto accountRegisterLoginDto)
+        public async Task<string> Login(AccountRegisterLoginDto model)
         {
-            var user = await _userManager.FindByEmailAsync(accountRegisterLoginDto.Email);
+            var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 return "Your login or password is incorrect";
             }
-            var signInResult = await _signManager.CheckPasswordSignInAsync(user, accountRegisterLoginDto.Password, false);
+            var signInResult = await _signManager
+                .CheckPasswordSignInAsync(user, model.Password, false);
             if (!signInResult.Succeeded)
             {
                 return "Your login or password is incorrect";
@@ -124,7 +120,6 @@ namespace QuickBuy.DA.Repositories
 
         private string BuildToken(User user)
         {
-
             var claims = new[] {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.IsAdmin.ToString()),

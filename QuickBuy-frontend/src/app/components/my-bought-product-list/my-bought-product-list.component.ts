@@ -17,8 +17,6 @@ export class MyBoughtProductListComponent implements OnInit, OnChanges {
     .subscribe(products => (this.products = products), error => console.log(error));
   }
   ngOnChanges() {
-    // this.productService.getAllMyBoughtProducts()
-    //  .subscribe(products => (this.products = products), error => console.log(error));
   }
 
 }
